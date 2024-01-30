@@ -1,9 +1,9 @@
 let tentativas = 1;
-let numeroLimite = 5;
+let numeroLimite = 11;
 let listaDeNumerosSorteados = [];
 let numeroSecreto = geraNumeroAleatorio();
 
-// código omitido. 
+
 
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag)
