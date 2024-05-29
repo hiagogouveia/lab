@@ -9,6 +9,22 @@ function sortear(): void {
     
     let sorteados: number[] = [];
     let numero: number;
+    let intervaloDaListaDenumeros: number = ate - de + 1;
+
+    if( !quantidade || !de || !ate) {
+        alert("por favor, insira dados nos campos");
+    }
+
+    if(de >= ate){
+        alert(`O número inicial não pode ser maior ou igual ao valor do último número`);
+        reiniciar();
+        return;
+    } 
+    if (quantidade > intervaloDaListaDenumeros ) {
+        alert(`Você quer sortear ${quantidade} números, porém a lista tem apenas ${intervaloDaListaDenumeros}, por favor, coloque um intervalo maior`);
+        reiniciar();
+        return;
+    }
 
     for (let i = 0; i < quantidade; i++) {
         numero = obterNumeroAleatorio(de, ate)
@@ -18,8 +34,17 @@ function sortear(): void {
         }
         sorteados.push(numero);
     }
+
     resultado.innerHTML = `<label class="texto__paragrafo">Números sorteados: ${sorteados}</label>`; //copiei essa label do index.html
     alterarStatusBotaoReiniciar();
+}
+
+function reiniciar(){
+    alterarStatusBotaoReiniciar();
+    (document.getElementById('quantidade') as HTMLInputElement).value = '';
+    (document.getElementById('de') as HTMLInputElement).value = '';
+    (document.getElementById('ate') as HTMLInputElement).value = '';
+    (document.getElementById('resultado') as HTMLInputElement).innerHTML = '<label class="texto__paragrafo">Números sorteados:  nenhum até agora </label>';
 }
   
 function obterNumeroAleatorio(min: number, max: number){
@@ -35,13 +60,4 @@ function alterarStatusBotaoReiniciar(){
         botao.classList.add('container__botao');
         botao.classList.remove('container__botao-desabilitado');
     }
-}
-
-function reiniciar(){
-    (document.getElementById('quantidade') as HTMLInputElement).value = '';
-    (document.getElementById('de') as HTMLInputElement).value = '';
-    (document.getElementById('ate') as HTMLInputElement).value = '';
-    (document.getElementById('resultado') as HTMLInputElement).innerHTML = '<label class="texto__paragrafo">Números sorteados:  nenhum até agora </label>';
-    
-    alterarStatusBotaoReiniciar()
 }
